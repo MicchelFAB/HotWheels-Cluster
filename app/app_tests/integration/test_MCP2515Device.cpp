@@ -48,15 +48,15 @@ struct CANFrame {
  */
 class RS485CANTest : public ::testing::Test {
 protected:
-  MCP2515Configurator* canBusConfigurator;
-  SPIController* spiController;
+  MCP2515Configurator *canBusConfigurator;
+  SPIController *spiController;
 
   void SetUp() override {
     try {
-		spiController = new SPIController();
-    	spiController->openDevice("/dev/spidev0.0");
-    	canBusConfigurator = new MCP2515Configurator(*spiController);
-    } catch (const std::exception& e) {
+      spiController = new SPIController();
+      spiController->openDevice("/dev/spidev0.0");
+      canBusConfigurator = new MCP2515Configurator(*spiController);
+    } catch (const std::exception &e) {
       FAIL() << "SetUp() failed with exception: " << e.what();
     }
   }

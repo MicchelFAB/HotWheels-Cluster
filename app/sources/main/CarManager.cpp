@@ -27,28 +27,25 @@
  * specified parent.
  */
 CarManager::CarManager(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::CarManager)
-    , m_dataManager(new DataManager())
-    , m_canBusManager(new CanBusManager("/dev/spidev0.0"))
-    , m_controlsManager(new ControlsManager())
-    , m_displayManager(nullptr)
-    , m_systemManager(new SystemManager())
-    , m_mileageManager(new MileageManager("/home/hotweels/app_data/mileage.json"))
-{
-    ui->setupUi(this);
-    initializeComponents();
+    : QMainWindow(parent), ui(new Ui::CarManager),
+      m_dataManager(new DataManager()),
+      m_canBusManager(new CanBusManager("/dev/spidev0.0")),
+      m_controlsManager(new ControlsManager()), m_displayManager(nullptr),
+      m_systemManager(new SystemManager()),
+      m_mileageManager(
+          new MileageManager("/home/hotweels/app_data/mileage.json")) {
+  ui->setupUi(this);
+  initializeComponents();
 }
 
-CarManager::~CarManager()
-{
-    delete m_displayManager;
-    delete m_controlsManager;
-    delete m_canBusManager;
-    delete m_dataManager;
-    delete m_mileageManager;
-    delete m_systemManager;
-    delete ui;
+CarManager::~CarManager() {
+  delete m_displayManager;
+  delete m_controlsManager;
+  delete m_canBusManager;
+  delete m_dataManager;
+  delete m_mileageManager;
+  delete m_systemManager;
+  delete ui;
 }
 
 /*!
@@ -163,37 +160,26 @@ void CarManager::initializeDisplayManager() {
   }
 }
 
-void CarManager::initializeSystemManager()
-{
-    if (m_systemManager) {
-        m_systemManager->initialize();
-        // Connect SystemManager signals to DataManager slots
-        connect(m_systemManager,
-                &SystemManager::timeUpdated,
-                m_dataManager,
-                &DataManager::handleTimeData);
+void CarManager::initializeSystemManager() {
+  if (m_systemManager) {
+    m_systemManager->initialize();
+    // Connect SystemManager signals to DataManager slots
+    connect(m_systemManager, &SystemManager::timeUpdated, m_dataManager,
+            &DataManager::handleTimeData);
 
-        connect(m_systemManager,
-                &SystemManager::wifiStatusUpdated,
-                m_dataManager,
-                &DataManager::handleWifiData);
+    connect(m_systemManager, &SystemManager::wifiStatusUpdated, m_dataManager,
+            &DataManager::handleWifiData);
 
-        connect(m_systemManager,
-                &SystemManager::temperatureUpdated,
-                m_dataManager,
-                &DataManager::handleTemperatureData);
+    connect(m_systemManager, &SystemManager::temperatureUpdated, m_dataManager,
+            &DataManager::handleTemperatureData);
 
-        // Connect SystemManager's battery signal to DataManager's battery slot
-        connect(m_systemManager,
-                &SystemManager::batteryPercentageUpdated,
-                m_dataManager,
-                &DataManager::handleBatteryPercentage);
+    // Connect SystemManager's battery signal to DataManager's battery slot
+    connect(m_systemManager, &SystemManager::batteryPercentageUpdated,
+            m_dataManager, &DataManager::handleBatteryPercentage);
 
-        connect(m_systemManager,
-                &SystemManager::ipAddressUpdated,
-                m_dataManager,
-                &DataManager::handleIpAddressData);
-    }
+    connect(m_systemManager, &SystemManager::ipAddressUpdated, m_dataManager,
+            &DataManager::handleIpAddressData);
+  }
 }
 
 /*!

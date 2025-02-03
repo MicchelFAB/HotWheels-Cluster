@@ -3,12 +3,11 @@
 
 #include <QString>
 
-class IMileageFileHandler
-{
+class IMileageFileHandler {
 public:
-    virtual ~IMileageFileHandler() = default;
-    virtual double readMileage() const = 0;
-    virtual void writeMileage(double mileage) const = 0;
+  virtual ~IMileageFileHandler() = default;
+  virtual double readMileage() const = 0;
+  virtual void writeMileage(double mileage) const = 0;
 };
 
 #endif // IMILEAGEFILEHANDLER_HPP

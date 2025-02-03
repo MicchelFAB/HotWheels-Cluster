@@ -4,11 +4,10 @@
 #include "IMileageFileHandler.hpp"
 #include <gmock/gmock.h>
 
-class MockMileageFileHandler : public IMileageFileHandler
-{
+class MockMileageFileHandler : public IMileageFileHandler {
 public:
-    MOCK_METHOD(double, readMileage, (), (const, override));
-    MOCK_METHOD(void, writeMileage, (double mileage), (const, override));
+  MOCK_METHOD(double, readMileage, (), (const, override));
+  MOCK_METHOD(void, writeMileage, (double mileage), (const, override));
 };
 
 #endif // MOCKMILEAGEFILEHANDLER_HPP

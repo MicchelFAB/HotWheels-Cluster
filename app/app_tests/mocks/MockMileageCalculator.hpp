@@ -4,11 +4,10 @@
 #include "IMileageCalculator.hpp"
 #include <gmock/gmock.h>
 
-class MockMileageCalculator : public IMileageCalculator
-{
+class MockMileageCalculator : public IMileageCalculator {
 public:
-    MOCK_METHOD(void, addSpeed, (float speed), (override));
-    MOCK_METHOD(double, calculateDistance, (), (override));
+  MOCK_METHOD(void, addSpeed, (float speed), (override));
+  MOCK_METHOD(double, calculateDistance, (), (override));
 };
 
 #endif // MOCKMILEAGECALCULATOR_HPP

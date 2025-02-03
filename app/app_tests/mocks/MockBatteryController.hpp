@@ -4,10 +4,9 @@
 #include "IBatteryController.hpp"
 #include <gmock/gmock.h>
 
-class MockBatteryController : public IBatteryController
-{
+class MockBatteryController : public IBatteryController {
 public:
-    MOCK_METHOD(float, getBatteryPercentage, (), (override));
+  MOCK_METHOD(float, getBatteryPercentage, (), (override));
 };
 
 #endif // MOCKBATTERYCONTROLLER_HPP
